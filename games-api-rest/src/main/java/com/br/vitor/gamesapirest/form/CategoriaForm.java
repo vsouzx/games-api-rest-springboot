@@ -19,7 +19,7 @@ public class CategoriaForm {
 	}
 	
 	public Categoria converter() {
-		return new Categoria(nome);
+		return new Categoria(this.nome);
 	}
 	
 	
