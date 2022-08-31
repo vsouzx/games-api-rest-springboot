@@ -7,5 +7,6 @@ import com.br.vitor.gamesapirest.modelo.Game;
 
 @Repository
 public interface GameRepository extends JpaRepository<Game, Long>{
-	
+
+    Game findByNome(String nome);
 }
