@@ -25,7 +25,6 @@ public class Game {
 	private double preco;
 	
 	@ManyToOne
-	@Column(name = "categoria_id")
 	private Categoria categoria;
 
 }
