@@ -14,11 +14,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoriaService {
 
-    @Autowired
-    private GameRepository gameRepository;
+    private final GameRepository gameRepository;
 
     @Autowired
     private CategoriaRepository categoriaRepository;
+
+    public CategoriaService(GameRepository gameRepository, CategoriaRepository categoriaRepository) {
+        this.gameRepository = gameRepository;
+        this.categoriaRepository = categoriaRepository;
+    }
 
     public List<CategoriaResponse> listar(){
         List<Categoria> categorias = categoriaRepository.findAll();

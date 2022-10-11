@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,15 +25,18 @@ import com.br.vitor.gamesapirest.repository.CategoriaRepository;
 @RequestMapping(value = "/games")
 public class GameController {
 
-	@Autowired
-	private GameService gameService;
+	private final GameService gameService;
 
-	@Autowired
-	private CategoriaRepository categoriaRepository;
+	private final CategoriaRepository categoriaRepository;
+
+	public GameController(GameService gameService, CategoriaRepository categoriaRepository) {
+		this.gameService = gameService;
+		this.categoriaRepository = categoriaRepository;
+	}
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<GameResponse>> listar() {
-		return ResponseEntity.ok(gameService.listar());
+	return ResponseEntity.ok(gameService.listar());
 	}
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

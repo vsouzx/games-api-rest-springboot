@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,9 +24,12 @@ import com.br.vitor.gamesapirest.modelo.Categoria;
 @RequestMapping(value = "/categorias")
 public class CategoriaController {
 
-	@Autowired
-	private CategoriaService categoriaService;
-	
+	private final CategoriaService categoriaService;
+
+	public CategoriaController(CategoriaService categoriaService) {
+		this.categoriaService = categoriaService;
+	}
+
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<CategoriaResponse>> listar(){
 		return ResponseEntity.ok(categoriaService.listar());

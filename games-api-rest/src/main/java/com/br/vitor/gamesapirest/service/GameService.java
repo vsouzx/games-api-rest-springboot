@@ -8,17 +8,19 @@ import com.br.vitor.gamesapirest.repository.GameRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GameService {
 
-    @Autowired
-    private GameRepository gameRepository;
+    private final GameRepository gameRepository;
 
-    @Autowired
-    private CategoriaRepository categoriaRepository;
+    private final CategoriaRepository categoriaRepository;
+
+    public GameService(GameRepository gameRepository, CategoriaRepository categoriaRepository) {
+        this.gameRepository = gameRepository;
+        this.categoriaRepository = categoriaRepository;
+    }
 
     public List<GameResponse> listar() {
         List<Game> games = gameRepository.findAll();

@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: password
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 20
+      connectionTimeout: 180000
+      idleTimeout: 60000
+      maxLifetime: 180000
+      ##leak-detection-threshold: 2000
+  jpa:
+    show-sql: false
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        ddl-auto: update
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
