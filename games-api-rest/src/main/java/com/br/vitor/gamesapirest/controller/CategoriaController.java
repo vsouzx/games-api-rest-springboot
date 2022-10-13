@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,7 +38,7 @@ public class CategoriaController {
 	
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CategoriaResponse> cadastrarCategoria(@RequestBody @Valid CategoriaRequest categoriaRequest) throws Exception {
-		return ResponseEntity.ok(categoriaService.cadastrar(categoriaRequest));
+		return new ResponseEntity(categoriaService.cadastrar(categoriaRequest), HttpStatus.CREATED);
 	}
 	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -46,8 +47,9 @@ public class CategoriaController {
 	}
 
 	@DeleteMapping(value = "{id}")
-	public void deletar(@PathVariable Long id) throws Exception {
+	public ResponseEntity deletar(@PathVariable Long id) throws Exception {
 		categoriaService.deletar(id);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
